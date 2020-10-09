@@ -6,8 +6,17 @@ module.exports = {
 		alignment: 'right',
 		color: 'red',
 	},
+
 	headerStyle: {
 		background: 'blue',
 	},
+
+	tableStyle: {
+		fillColor: '#eee',
+		color: 'blue',
+		fontSize: 9,
+		margin: [0, 15, 0, 5],
+	},
+
 	footerStyle: {},
 };
