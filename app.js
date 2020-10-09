@@ -1,10 +1,17 @@
-const PDF = require('pdfmake');
 const fs = require('fs');
+const PDF = require('pdfmake');
 const fonts = require('./fonts');
 const { header } = require('./header');
-const { data } = require('./data');
 const { contentBuilder } = require('./contentBuilder');
 const printer = new PDF(fonts);
+const xlsx = require('xlsx');
+const workbook = xlsx.readFile('test2.xlsx');
+
+/* DO SOMETHING WITH workbook HERE */
+var first_sheet_name = workbook.SheetNames[0];
+/* Get worksheet */
+var worksheet = workbook.Sheets[first_sheet_name];
+const data = xlsx.utils.sheet_to_json(worksheet, { raw: true });
 
 const content = contentBuilder(data);
 
