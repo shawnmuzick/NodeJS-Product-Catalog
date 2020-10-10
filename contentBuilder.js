@@ -2,34 +2,38 @@ const { tableStyle } = require('./styles');
 
 module.exports = {
 	//accepts a data source and options
-	contentBuilder: (data, options = { width: 'auto', headerRows: 0, style: tableStyle }) => {
+	contentBuilder: (
+		data,
+		options = { width: 'auto', numHeaderRows: 1, style: tableStyle }
+	) => {
 		//retrieve any user given options, otherwise us the defaults
-		let { width, headerRows, style } = options;
-		let body = [];
-		let builtWidths = false;
+		let { width, numHeaderRows, style } = options;
 
 		//build the table that houses the data
 		let table = {
-			headerRows: headerRows,
+			headerRows: numHeaderRows,
 			widths: [],
-			body: body,
+			body: [],
 		};
 
-		//build the body of the table
-		table.body = data.map((i) => {
-			let arr = [];
+		//build the header and widths
+		let headerContent = [];
+		for (property in data[0]) {
+			table.widths.push(width || 'auto');
+			headerContent.push({ text: property });
+		}
 
+		//build the body of the table
+		let body = data.map((i) => {
+			let arr = [];
 			for (property in i) {
 				arr.push({ text: i[property] });
-				//if it's our first time through, set up the column widths
-				if (!builtWidths) table.widths.push(width || 'auto');
 			}
-
-			//we set up the columns, so prevent future data from trying to
-			builtWidths = true;
-
 			return arr;
 		});
+
+		table.body.push(headerContent);
+		table.body.push(...body);
 
 		//create the content object to return to the pdf maker
 		let content = [
@@ -39,7 +43,6 @@ module.exports = {
 				table: table,
 			},
 		];
-
 		return content;
 	},
 };

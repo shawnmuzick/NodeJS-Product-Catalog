@@ -5,7 +5,7 @@ const { header } = require('./header');
 const { contentBuilder } = require('./contentBuilder');
 const printer = new PDF(fonts);
 const xlsx = require('xlsx');
-const workbook = xlsx.readFile('test2.xlsx');
+const workbook = xlsx.readFile('test.xls');
 
 /* DO SOMETHING WITH workbook HERE */
 var first_sheet_name = workbook.SheetNames[0];
