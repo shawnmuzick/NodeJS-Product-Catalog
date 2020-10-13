@@ -1,4 +1,5 @@
-const { tableStyle } = require('./styles');
+const fs = require('fs');
+const { tableStyle, footerStyle } = require('./styles');
 
 module.exports = {
 	//accepts a data source and options
@@ -8,6 +9,7 @@ module.exports = {
 	) => {
 		//retrieve any user given options, otherwise us the defaults
 		let { width, numHeaderRows, style } = options;
+		let builtHeader = false;
 
 		//build the table that houses the data
 		let table = {
@@ -18,20 +20,34 @@ module.exports = {
 
 		//build the header and widths
 		let headerContent = [];
-		for (property in data[0]) {
-			table.widths.push(width || 'auto');
-			headerContent.push({ text: property });
-		}
 
 		//build the body of the table
 		let body = data.map((i) => {
 			let arr = [];
+			i.img = `img/${i.csk_sku}.jpg`;
 			for (property in i) {
-				arr.push({ text: i[property] });
+				if (!builtHeader) {
+					console.log(property);
+					table.widths.push(width || 'auto');
+					headerContent.push({ text: property });
+				}
+
+				if (property === 'img') {
+					if (!fs.existsSync(i.img)) i.img = 'img/test.jpg';
+					var bin = fs.readFileSync(i.img);
+					var b64 = Buffer.from(bin).toString('base64');
+
+					arr.push({
+						image: `data:image/jpeg;base64,${b64}`,
+					});
+				} else {
+					arr.push({ text: i[property] });
+				}
 			}
+			builtHeader = true;
 			return arr;
 		});
-
+		console.log(table.widths);
 		table.body.push(headerContent);
 		table.body.push(...body);
 
