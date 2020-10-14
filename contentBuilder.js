@@ -10,10 +10,11 @@ module.exports = {
 			numHeaderRows: 1,
 			style: tableStyle,
 			defaultImg: 'img/test.jpg',
+			imgDimensions: { width: 100, height: 100 },
 		}
 	) => {
 		//retrieve any user given options, otherwise us the defaults
-		let { width, numHeaderRows, style, defaultImg } = options;
+		let { width, numHeaderRows, style, defaultImg, imgDimensions } = options;
 		let builtHeader = false;
 
 		//build the table that houses the data
@@ -37,7 +38,6 @@ module.exports = {
 			for (property in i) {
 				//if we haven't built the header, build it
 				if (!builtHeader) {
-					console.log(property);
 					table.widths.push(width || 'auto');
 					headerContent.push({ text: property });
 				}
@@ -55,6 +55,8 @@ module.exports = {
 					//push the imagestring into the array as an image type
 					arr.push({
 						image: `data:image/jpeg;base64,${b64}`,
+						width: imgDimensions.width,
+						height: imgDimensions.height,
 					});
 				} else {
 					//otherwise just push it in as text
@@ -67,7 +69,6 @@ module.exports = {
 			//push the array into the body
 			return arr;
 		});
-		console.log(table.widths);
 		table.body.push(headerContent);
 		table.body.push(...body);
 
