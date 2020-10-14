@@ -15,71 +15,52 @@ module.exports = {
 	) => {
 		//retrieve any user given options, otherwise us the defaults
 		let { width, numHeaderRows, style, defaultImg, imgDimensions } = options;
-		let builtHeader = false;
-
-		//build the table that houses the data
-		let table = {
-			headerRows: numHeaderRows,
-			widths: [],
-			body: [],
-		};
-
-		//build the header and widths
-		let headerContent = [];
-
-		//build the body of the table
-		let body = data.map((i) => {
-			let arr = [];
-
-			//check if already an image propery, if not set it
-			if (!i.img) i.img = `img/${i.csk_sku}.jpg`;
-
-			//loop through each row's columns
-			for (property in i) {
-				//if we haven't built the header, build it
-				if (!builtHeader) {
-					table.widths.push(width || 'auto');
-					headerContent.push({ text: property });
-				}
-				//if the current property is image, insert the image object
-				if (property === 'img') {
-					//if the image path doesn't exist, set it to a default
-					if (!fs.existsSync(i.img)) i.img = defaultImg;
-
-					//read it as binary
-					var bin = fs.readFileSync(i.img);
-
-					//create base64 encoded string
-					var b64 = Buffer.from(bin).toString('base64');
-
-					//push the imagestring into the array as an image type
-					arr.push({
-						image: `data:image/jpeg;base64,${b64}`,
-						width: imgDimensions.width,
-						height: imgDimensions.height,
-					});
-				} else {
-					//otherwise just push it in as text
-					arr.push({ text: i[property] });
-				}
-			}
-			//set the header to true after the first time around
-			builtHeader = true;
-
-			//push the array into the body
-			return arr;
-		});
-		table.body.push(headerContent);
-		table.body.push(...body);
 
 		//create the content object to return to the pdf maker
 		let content = [
 			{
 				style: style,
 				layout: 'lightHorizontalLines',
-				table: table,
+				table: {
+					headerRows: numHeaderRows,
+					widths: [],
+					body: [],
+				},
 			},
 		];
+
+		for (let i = 0; i < data.length; i++) {
+			let arr = [];
+
+			for (let j = 0; j < data[i].length; j++) {
+				//first row, set up a column width for each column
+				if (i === 0) content[0].table.widths.push(width || 'auto');
+
+				//for images, which should be the first column in every row after the first row
+				if (j === 0 && i !== 0) {
+					if (!data[i][j]) data[i][j] = `img/${i.csk_sku}.jpg`;
+
+					//if the image path doesn't exist, set it to a default image
+					if (!fs.existsSync(data[i][j])) data[i][j] = defaultImg;
+
+					var bin = fs.readFileSync(data[i][j]);
+					var b64 = Buffer.from(bin).toString('base64');
+
+					//push the imagestring into the array as an image type
+					arr.push([
+						{
+							image: `data:image/jpeg;base64,${b64}`,
+							width: imgDimensions.width,
+							height: imgDimensions.height,
+						},
+					]);
+				} else {
+					arr.push({ text: data[i][j] });
+				}
+			}
+			//push the array into the body
+			content[0].table.body.push(arr);
+		}
 		return content;
 	},
 };
