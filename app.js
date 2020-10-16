@@ -3,6 +3,7 @@ const PDF = require('pdfmake');
 const fonts = require('./fonts');
 const { header } = require('./header');
 const { contentBuilder } = require('./contentBuilder');
+/*
 const printer = new PDF(fonts);
 const xlsx = require('xlsx');
 const workbook = xlsx.readFile('test.xls');
@@ -28,8 +29,8 @@ document.pipe(fs.createWriteStream('./test.pdf'));
 document.end();
 const endTime = process.hrtime(startTime);
 console.info('Total Execution Time %ds %dms', endTime[0], endTime[1] / 1000000);
-
-const { app, BrowserWindow } = require('electron');
+*/
+const { app, BrowserWindow, dialog } = require('electron');
 
 function createWindow() {
 	const win = new BrowserWindow({
@@ -41,7 +42,7 @@ function createWindow() {
 	});
 
 	win.loadFile('index.html');
-	win.webContents.openDevTools();
+	dialog.showOpenDialog({ properties: ['openFile'] }).then((p) => console.log(p.filePaths));
 }
 
 app.whenReady().then(createWindow);
