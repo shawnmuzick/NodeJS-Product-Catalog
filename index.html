@@ -4,10 +4,115 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Document</title>
+		<style>
+			html {
+				margin: 0px;
+				padding: 0px;
+			}
+			body {
+				padding: 0px;
+				margin: 0px;
+				background-color: #2d2d30;
+				border: 1px solid #68217a;
+				border-bottom: 24px solid #68217a;
+				position: absolute;
+				top: 0px;
+				left: 0px;
+				right: 0px;
+				bottom: 0px;
+			}
+			#title-bar {
+				-webkit-app-region: drag;
+				height: 32px;
+				padding: 0px;
+				margin: 0px;
+				color: #adadad;
+				font-family: sans-serif;
+			}
+			#title {
+				position: fixed;
+				top: 0px;
+				left: 12px;
+				line-height: 32px;
+				font-size: 14px;
+			}
+			#title-bar-btns button {
+				height: 32px;
+				width: 32px;
+				background-color: transparent;
+				border: none;
+				color: #f1f1f1;
+				font-size: 16px;
+			}
+			#title-bar-btns button:hover {
+				background-color: #3f3f41;
+			}
+			#content {
+				padding: 12px;
+				color: #cccccc;
+			}
+			a {
+				color: #68217a;
+			}
+			#title-bar-btns {
+				-webkit-app-region: no-drag;
+				position: fixed;
+				top: 0px;
+				right: 6px;
+			}
+		</style>
 	</head>
 	<body>
-        <h1>Hello Electron!</h2>
-
-            <button id = "btn">Submit</button>
+		<div id="title-bar">
+			<div id="title">PDF Make</div>
+			<div id="title-bar-btns">
+				<button id="min-btn">-</button>
+				<button id="max-btn">+</button>
+				<button id="close-btn">x</button>
+			</div>
+		</div>
+		<h1>Hello Electron!</h1>
+		<button id="btn">Submit</button>
 	</body>
+
+	<script>
+		(function () {
+			const remote = require('electron').remote;
+			function init() {
+				document.getElementById('min-btn').addEventListener(
+					'click',
+					function (e) {
+						const window = remote.getCurrentWindow();
+						window.minimize();
+					}
+				);
+
+				document.getElementById('max-btn').addEventListener(
+					'click',
+					function (e) {
+						const window = remote.getCurrentWindow();
+						if (!window.isMaximized()) {
+							window.maximize();
+						} else {
+							window.unmaximize();
+						}
+					}
+				);
+
+				document.getElementById('close-btn').addEventListener(
+					'click',
+					function (e) {
+						const window = remote.getCurrentWindow();
+						window.close();
+					}
+				);
+			}
+
+			document.onreadystatechange = function () {
+				if (document.readyState == 'complete') {
+					init();
+				}
+			};
+		})();
+	</script>
 </html>

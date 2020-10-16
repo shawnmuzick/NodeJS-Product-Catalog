@@ -11,14 +11,15 @@ async function createWindow() {
 		height: 600,
 		webPreferences: {
 			nodeIntegration: true,
+			enableRemoteModule: true,
 		},
+		frame: false,
 	});
 
 	win.loadFile('index.html');
 	const file = await dialog
 		.showOpenDialog({ properties: ['openFile'] })
 		.then((p) => p.filePaths[0]);
-
 	const workbook = xlsx.readFile(file);
 	var first_sheet_name = workbook.SheetNames[0];
 	var worksheet = workbook.Sheets[first_sheet_name];
