@@ -13,6 +13,7 @@ module.exports = {
 			imgDimensions: { width: 100, height: 100 },
 		}
 	) => {
+		const startTime = process.hrtime();
 		//retrieve any user given options, otherwise us the defaults
 		let { width, numHeaderRows, style, defaultImg, imgDimensions } = options;
 
@@ -61,6 +62,8 @@ module.exports = {
 			//push the array into the body
 			content[0].table.body.push(arr);
 		}
+		const endTime = process.hrtime(startTime);
+		console.info('Function Execution Time %ds %dms', endTime[0], endTime[1] / 1000000);
 		return content;
 	},
 };

@@ -1,11 +1,11 @@
 const { headerStyle } = require('./styles');
 
 module.exports = {
-	header: (currentPage, pageCount, pageSize) => {
+	header: () => {
 		return [
 			{
 				text: 'Header Text function',
-				alignment: currentPage % 2 ? 'left' : 'right',
+				alignment: 'right',
 				style: headerStyle,
 			},
 		];
