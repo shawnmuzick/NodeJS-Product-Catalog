@@ -8,26 +8,29 @@
 			html {
 				margin: 0px;
 				padding: 0px;
+				color: white;
+				font-family: sans-serif;
 			}
 			body {
 				padding: 0px;
 				margin: 0px;
-				background-color: #2d2d30;
-				border: 1px solid #68217a;
-				border-bottom: 24px solid #68217a;
+				background-color: #212121;
 				position: absolute;
 				top: 0px;
 				left: 0px;
 				right: 0px;
 				bottom: 0px;
 			}
+			main {
+				padding: 10px;
+			}
 			#title-bar {
 				-webkit-app-region: drag;
 				height: 32px;
 				padding: 0px;
 				margin: 0px;
-				color: #adadad;
-				font-family: sans-serif;
+				background-color: #1a1a1a;
+				border-bottom: solid 1px black;
 			}
 			#title {
 				position: fixed;
@@ -36,7 +39,7 @@
 				line-height: 32px;
 				font-size: 14px;
 			}
-			#title-bar-btns button {
+			.title-bar-btns button {
 				height: 32px;
 				width: 32px;
 				background-color: transparent;
@@ -44,8 +47,11 @@
 				color: #f1f1f1;
 				font-size: 16px;
 			}
-			#title-bar-btns button:hover {
+			.title-bar-btns button:hover {
 				background-color: #3f3f41;
+			}
+			#close-btn:hover {
+				background-color: red;
 			}
 			#content {
 				padding: 12px;
@@ -54,25 +60,26 @@
 			a {
 				color: #68217a;
 			}
-			#title-bar-btns {
+			.title-bar-btns {
 				-webkit-app-region: no-drag;
 				position: fixed;
 				top: 0px;
-				right: 6px;
+				right: 0px;
 			}
 		</style>
 	</head>
 	<body>
 		<div id="title-bar">
 			<div id="title">PDF Make</div>
-			<div id="title-bar-btns">
+			<div class="title-bar-btns">
 				<button id="min-btn">-</button>
 				<button id="max-btn">+</button>
 				<button id="close-btn">x</button>
 			</div>
 		</div>
-		<h1>Hello Electron!</h1>
-		<button id="btn">Submit</button>
+		<main>
+			<h1>Hello Electron!</h1>
+		</main>
 	</body>
 
 	<script>
