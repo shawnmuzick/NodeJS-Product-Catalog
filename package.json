@@ -13,7 +13,8 @@
 	},
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"dist": "electron-builder"
+		"dist": "electron-builder",
+		"start": "electron app.js"
 	},
 	"author": "",
 	"license": "ISC",
