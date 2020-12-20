@@ -56,7 +56,10 @@ module.exports = {
 						},
 					]);
 				} else {
-					arr.push({ text: data[i][j] });
+					if (i === 0 && j === 0) arr.push({ text: '' });
+					else if (i === 0)
+						arr.push({ text: data[i][j], bold: true });
+					else arr.push({ text: data[i][j] });
 				}
 			}
 			//push the array into the body

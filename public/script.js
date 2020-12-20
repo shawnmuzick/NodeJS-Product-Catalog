@@ -1,7 +1,12 @@
 (function () {
 	const remote = require('electron').remote;
-	const dialog = require('electron').remote.dialog;
 	const { windowHandler } = require('../windowHandler.js');
+	const file = document.getElementById('file');
+	const widths = document.getElementById('widths');
+	const numHeaderRows = document.getElementById('numHeaderRows');
+	const imageHeight = document.getElementById('imageHeight');
+	const defaultImg = document.getElementById('defaultImg');
+
 	function init() {
 		document.getElementById('min-btn').addEventListener('click', function (e) {
 			const window = remote.getCurrentWindow();
@@ -18,18 +23,21 @@
 		});
 
 		document.getElementById('close-btn').addEventListener('click', function (e) {
-			console.log('test');
 			const window = remote.getCurrentWindow();
 			window.close();
 		});
-		document.getElementById('submit-btn').addEventListener('click', async () => {
-			const window = remote.getCurrentWindow();
-			const file = await dialog
-				.showOpenDialog({
-					properties: ['openFile'],
-				})
-				.then((p) => p.filePaths[0]);
-			windowHandler(file);
+		document.getElementById('submit-btn').addEventListener('click', async (e) => {
+			e.preventDefault();
+			let options = {
+				width: Number(widths.value) ? Number(widths.value) : widths.value,
+				numHeaderRows: Number(numHeaderRows.value),
+				defaultImg: defaultImg.files[0].path,
+				imgDimensions: {
+					width: Number(imageHeight.value),
+					height: Number(imageHeight.value),
+				},
+			};
+			windowHandler(file.files[0].path, options);
 		});
 	}
 
