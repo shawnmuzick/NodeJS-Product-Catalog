@@ -1,6 +1,6 @@
 module.exports = {
 	main: {
-		fontSize: 32,
+		fontSize: 12,
 		bold: true,
 		italics: true,
 		alignment: 'right',
@@ -13,9 +13,8 @@ module.exports = {
 
 	tableStyle: {
 		fillColor: '#eee',
-		color: 'blue',
-		fontSize: 9,
-		margin: [0, 15, 0, 5],
+		fontSize: 10,
+		margin: [0, 0, 0, 0],
 	},
 
 	footerStyle: {},

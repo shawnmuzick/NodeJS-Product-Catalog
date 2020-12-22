@@ -1,12 +1,20 @@
 const { headerStyle } = require('./styles');
 
 module.exports = {
-	header: () => {
+	header: (
+		options = {
+			text: 'DEFAULT HEADER',
+			alignment: 'right',
+			style: headerStyle,
+		}
+	) => {
+		const { text, textAlign, style } = options;
+		console.log(style.background);
 		return [
 			{
-				text: 'Header Text function',
-				alignment: 'right',
-				style: headerStyle,
+				text: text,
+				alignment: textAlign,
+				style: style,
 			},
 		];
 	},

@@ -17,6 +17,9 @@ module.exports = {
 		//retrieve any user given options, otherwise us the defaults
 		let { width, numHeaderRows, style, defaultImg, imgDimensions } = options;
 
+		//temporary to preserve some styling until user def is fully implemented
+		style = tableStyle;
+
 		//create the content object to return to the pdf maker
 		let content = [
 			{
@@ -56,10 +59,19 @@ module.exports = {
 						},
 					]);
 				} else {
-					if (i === 0 && j === 0) arr.push({ text: '' });
+					//no need for "img" column header
+					if (i === 0 && j === 0)
+						arr.push({ text: '', margin: 0, padding: 0 });
+					//bold the column headers
 					else if (i === 0)
-						arr.push({ text: data[i][j], bold: true });
-					else arr.push({ text: data[i][j] });
+						arr.push({
+							text: data[i][j],
+							bold: true,
+							margin: 0,
+							padding: 0,
+						});
+					//otherwise just push in the content
+					else arr.push({ text: data[i][j], margin: 0, padding: 0 });
 				}
 			}
 			//push the array into the body

@@ -4,7 +4,7 @@ const { header } = require('./header');
 const { contentBuilder } = require('./contentBuilder');
 const printer = new PDF(fonts);
 const xlsx = require('xlsx');
-const windowHandler = (file, options) => {
+const windowHandler = (file, options, headerOptions) => {
 	const workbook = xlsx.readFile(file);
 	var first_sheet_name = workbook.SheetNames[0];
 	var worksheet = workbook.Sheets[first_sheet_name];
@@ -15,8 +15,9 @@ const windowHandler = (file, options) => {
 	const definition = {
 		defaultStyle: {
 			font: 'Courier',
+			margin: 2,
 		},
-		header: header,
+		header: header(headerOptions),
 		content: content,
 	};
 

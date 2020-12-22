@@ -1,6 +1,11 @@
 (function () {
 	const remote = require('electron').remote;
 	const { windowHandler } = require('../windowHandler.js');
+
+	const headerText = document.getElementById('headerText');
+	const headerTextAlign = document.getElementById('headerTextAlign');
+	const headerBgColor = document.getElementById('headerBgColor');
+
 	const file = document.getElementById('file');
 	const widths = document.getElementById('widths');
 	const numHeaderRows = document.getElementById('numHeaderRows');
@@ -28,6 +33,13 @@
 		});
 		document.getElementById('submit-btn').addEventListener('click', async (e) => {
 			e.preventDefault();
+			let headerOptions = {
+				text: headerText.value,
+				textAlign: headerTextAlign.value,
+				style: {
+					background: headerBgColor.value,
+				},
+			};
 			let options = {
 				width: Number(widths.value) ? Number(widths.value) : widths.value,
 				numHeaderRows: Number(numHeaderRows.value),
@@ -37,7 +49,7 @@
 					height: Number(imageHeight.value),
 				},
 			};
-			windowHandler(file.files[0].path, options);
+			windowHandler(file.files[0].path, options, headerOptions);
 		});
 	}
 
