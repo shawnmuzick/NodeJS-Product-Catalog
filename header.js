@@ -9,12 +9,13 @@ module.exports = {
 		}
 	) => {
 		const { text, textAlign, style } = options;
-		console.log(style.background);
 		return [
 			{
 				text: text,
 				alignment: textAlign,
 				style: style,
+				margin: 5,
+				padding: 5,
 			},
 		];
 	},

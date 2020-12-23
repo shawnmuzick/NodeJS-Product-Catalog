@@ -22,41 +22,86 @@
 					<h2>Header Options</h2>
 					<div class="formGroup">
 						<label for="headerText">Header Text</label>
-						<input type="text" id="headerText" />
+						<input
+							type="text"
+							id="headerText"
+							value="DEFAULT HEADER TEXT"
+						/>
 					</div>
 					<div class="formGroup">
 						<label for="headerTextAlign">Text Align:</label>
-						<input type="text" id="headerTextAlign" />
+						<select name="headerTextAlign" id="headerTextAlign">
+							<option value="left">left</option>
+							<option value="right">right</option>
+							<option value="center">center</option>
+						</select>
 					</div>
 					<div class="formGroup">
 						<label for="headerBgColor">Background Color</label>
-						<input type="text" id="headerBgColor" />
+						<input
+							type="text"
+							id="headerBgColor"
+							value="#eee"
+						/>
 					</div>
 				</section>
-				<div class="formGroup">
-					<label for="file"> Select a file </label>
-					<input type="file" id="file" />
-				</div>
-				<div class="formGroup">
-					<label for="widths"> Column widths </label>
-					<select name="widths" id="widths">
-						<option value="auto">auto</option>
-					</select>
-				</div>
-				<div class="formGroup">
-					<label for="headerRows">Number of Header Rows </label>
-					<input type="number" id="numHeaderRows" value="1" />
-				</div>
-				<div class="formGroup">
-					<label for="imageHeight">Image height in pixels </label>
-					<input type="number" id="imageHeight" value="100" />
-				</div>
-				<div class="formGroup">
-					<label for="defaultImg"
-						>Select a default image for missing images:
-					</label>
-					<input type="file" id="defaultImg" />
-				</div>
+				<section>
+					<h2>Document options</h2>
+					<div class="formGroup">
+						<label for="file"> Select a file </label>
+						<input type="file" id="file" />
+					</div>
+					<div class="formGroup">
+						<label for="widths"> Column widths </label>
+						<select name="widths" id="widths">
+							<option value="auto">auto</option>
+							<option value="50">Small</option>
+							<option value="75">Medium</option>
+							<option value="100">Large</option>
+						</select>
+					</div>
+					<div class="formGroup">
+						<label for="headerRows"
+							>Number of Header Rows
+						</label>
+						<input type="number" id="numHeaderRows" value="1" />
+					</div>
+					<div class="formGroup">
+						<label for="imageHeight"
+							>Image height in pixels
+						</label>
+						<input type="number" id="imageHeight" value="50" />
+					</div>
+					<div class="formGroup">
+						<label for="defaultImg"
+							>Select a default image for missing images:
+						</label>
+						<input type="file" id="defaultImg" />
+					</div>
+				</section>
+				<section>
+					<h2>Table Styling</h2>
+					<div class="formGroup">
+						<label for="tableFillColor">Table Fill Color</label>
+						<input
+							type="text"
+							id="tableFillColor"
+							value="#eee"
+						/>
+					</div>
+					<div class="formGroup">
+						<label for="tableFontSize">TableFontSize</label>
+						<input
+							type="number"
+							id="tableFontSize"
+							value="10"
+						/>
+					</div>
+					<div class="formGroup">
+						<label for="tableMargins">Table Margins</label>
+						<input type="number" id="tableMargins" value="0" />
+					</div>
+				</section>
 				<button id="submit-btn">Submit</button>
 			</form>
 		</main>

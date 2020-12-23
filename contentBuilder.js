@@ -17,9 +17,6 @@ module.exports = {
 		//retrieve any user given options, otherwise us the defaults
 		let { width, numHeaderRows, style, defaultImg, imgDimensions } = options;
 
-		//temporary to preserve some styling until user def is fully implemented
-		style = tableStyle;
-
 		//create the content object to return to the pdf maker
 		let content = [
 			{

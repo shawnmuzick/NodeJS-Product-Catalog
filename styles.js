@@ -9,6 +9,7 @@ module.exports = {
 
 	headerStyle: {
 		background: 'blue',
+		margin: 5,
 	},
 
 	tableStyle: {

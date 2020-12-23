@@ -12,6 +12,10 @@
 	const imageHeight = document.getElementById('imageHeight');
 	const defaultImg = document.getElementById('defaultImg');
 
+	const tableFillColor = document.getElementById('tableFillColor');
+	const tableFontSize = document.getElementById('tableFontSize');
+	const tableMargins = document.getElementById('tableMargins');
+
 	function init() {
 		document.getElementById('min-btn').addEventListener('click', function (e) {
 			const window = remote.getCurrentWindow();
@@ -40,6 +44,11 @@
 					background: headerBgColor.value,
 				},
 			};
+			let tableStyle = {
+				fillColor: tableFillColor.value,
+				fontSize: Number(tableFontSize.value),
+				margin: Number(tableMargins.value),
+			};
 			let options = {
 				width: Number(widths.value) ? Number(widths.value) : widths.value,
 				numHeaderRows: Number(numHeaderRows.value),
@@ -48,6 +57,7 @@
 					width: Number(imageHeight.value),
 					height: Number(imageHeight.value),
 				},
+				style: tableStyle,
 			};
 			windowHandler(file.files[0].path, options, headerOptions);
 		});
