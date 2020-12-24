@@ -23,7 +23,7 @@ const windowHandler = (file, options, headerOptions) => {
 
 	const startTime = process.hrtime();
 	const document = printer.createPdfKitDocument(definition);
-	document.pipe(fs.createWriteStream('./test.pdf'));
+	document.pipe(fs.createWriteStream('./catalog.pdf'));
 	document.end();
 	const endTime = process.hrtime(startTime);
 	console.info('Total Execution Time %ds %dms', endTime[0], endTime[1] / 1000000);

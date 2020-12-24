@@ -1,7 +1,7 @@
 {
 	"name": "pdfmake",
 	"version": "1.0.0",
-	"description": "",
+	"description": "A simple utility to create a pdf from an excel sheet",
 	"main": "app.js",
 	"dependencies": {
 		"pdfmake": "^0.1.68",
@@ -21,7 +21,8 @@
 	"build": {
 		"appId": "Product Catalog",
 		"win": {
-			"target": "NSIS"
+			"target": "NSIS",
+			"icon": "./public/icons/winIcon.png"
 		}
 	}
 }
